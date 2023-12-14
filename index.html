@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Lobster&family=Monoton&family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,700;1,400;1,500&family=Neonderthaw&family=Silkscreen:wght@400;700&family=Tilt+Neon&family=Urbanist:ital,wght@0,200;0,400;0,600;0,800;1,200;1,400&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <style>
+        /*
+         NEON COLORS PALETTE
+         Pink:     #FF1178
+         Red:      #FE0000
+         Yellow:   #FFF205
+         Cyian:    #01FFF4
+         Green:    #7CFF01
+         Bg-color: #181818
+         */
+        body{
+            font-family: 'Urbanist', sans-serif;
+        }
+        .my-bg {
+            background-color: #181818 ;
+        }
+
+        .my-bg-lighter {
+            background-color: #272727;
+        }
+
+        .my-bg-light {
+            background-color: #323232;
+        }
+        .d-center{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .w-90{
+            width: 90%;
+        }
+        
+    </style>
+</head>
+
+<body class="my-bg p-3 text-white text-center d-flex flex-column align-items-center gap-4" style="height: 100vh;">
+    <h3 class="h3 text-center mt-3 mb-0">Expense Tracker</h3>
+    <section id="dashboard" class="d-flex flex-column p-0 m-0 gap-4 w-75">
+        <div id="balance-main" class="d-flex gap-0 w-100">
+            <img src="./assets/img/piggy-bank.png" alt="" style="width:40%">
+            <div class="d-center" style="width:60%">
+                <p class="text-center">BALANCE</p>
+                <!--Dynamic updating, w/ class for positive or negative color-->
+                <h1 id="balance" class="text-center text-success fw-bold">$428.00</h1>
+            </div>
+        </div>
+        <div id="balance-month" class="d-flex rounded my-bg-light w-100 pt-2 pb-2" >
+            <div id="income-wrapper" class="w-50 d-center gap-1">
+                <p class="text-center m-0">INCOME</p>
+                <!--Dynamic updating-->
+                <h3 id="income-month" class="text-center text-success m-0">+$450</h3>
+            </div>
+            <div id="expense-wrapper"  class="w-50 d-center gap-1 border-start">
+                <p class="text-center m-0">EXPENSE</p>
+                <!--Dynamic updating-->
+                <h3 id="expense-month" class="text-center text-danger m-0">-$22</h3>
+            </div>
+        </div>
+    </section>
+    <section id="history-section" class="d-flex flex-column p-0 m-0 w-90">
+        <div id="history-title" class="d-flex justify-content-between border-bottom mb-3">
+            <p class="m-0">History</p>
+            <a class="text-decoration-none text-white-50" href="#">SEE ALL</a>
+        </div>
+        <div id="history" class="d-center gap-2">
+           <!--Dynamic 4/5 elements to create-->                                                       
+           <div class="my-bg-light rounded p-2 d-flex justify-content-between w-100 border-start border-5 border-danger">
+            <!--                                                                                        ^^ var: expense ^^-->
+                <p class="m-0 text-white-50">Motivation</p> 
+                <div class="d-flex">
+                    <p class="m-0 text-white-50">+/- $45.00</p>
+                    <button class="border-0 bg-transparent p-0 ps-2"><img src="./assets/img/delete.png" alt="" width="60%"></button>
+                </div>
+           </div>
+           <div class="my-bg-light rounded p-2 d-flex justify-content-between w-100 border-start border-5 border-success">
+            <!--                                                                                        ^^ var: expense ^^-->
+                <p class="m-0 text-white-50">Motivation</p> 
+                <div class="d-flex">
+                    <p class="m-0 text-white-50">+/- $45.00</p>
+                    <button class="border-0 bg-transparent p-0 ps-2"><img src="./assets/img/delete.png" alt="" width="60%"></button>
+                </div>
+           </div>
+           <div class="my-bg-light rounded p-2 d-flex justify-content-between w-100 border-start border-5 border-danger">
+            <!--                                                                                        ^^ var: expense ^^-->
+                <p class="m-0 text-white-50">Motivation</p> 
+                <div class="d-flex">
+                    <p class="m-0 text-white-50">+/- $45.00</p>
+                    <button class="border-0 bg-transparent p-0 ps-2"><img src="./assets/img/delete.png" alt="" width="60%"></button>
+                </div>
+           </div>
+           <div class="my-bg-light rounded p-2 d-flex justify-content-between w-100 border-start border-5 border-success">
+            <!--                                                                                        ^^ var: expense ^^-->
+                <p class="m-0 text-white-50">Motivation</p> 
+                <div class="d-flex">
+                    <p class="m-0 text-white-50">+/- $45.00</p>
+                    <button class="border-0 bg-transparent p-0 ps-2"><img src="./assets/img/delete.png" alt="" width="60%"></button>
+                </div>
+           </div>
+        </div>
+    </section>
+    <section id="add-transaction" class="d-flex flex-column p-0 m-0 pb-3 w-90">
+        <div id="transaction-title" class="d-flex justify-content-between border-bottom mb-1">
+            <p class="m-0">Add New Transaction</p>
+        </div>
+        <form action="" class="d-flex flex-column">
+            <label for="date" class="text-white-50 align-self-start mb-1">Date:</label>
+            <input type="date" name="date" id="date" class="border rounded bg-transparent text-white mb-2">
+
+            <label for="amount" class="text-white-50 align-self-start mb-1">Amount:</label>
+            <input type="number" name="amount" id="amount" class="border rounded bg-transparent text-white mb-2">
+
+            <label for="description" class="text-white-50 align-self-start mb-1">Description:</label>
+            <input type="text" name="description" id="description" class="border rounded bg-transparent text-white mb-2">
+
+            <div class="form-check-inline">
+                <input type="radio" class="form-check-input bg-transparent border" name="transactionType" id="expense" value="expense">
+                <label for="expense" class="me-2 form-check-label">Expense</label>
+                <input type="radio" class="form-check-input bg-transparent border" name="transactionType" id="income" value="incoming" checked>
+                <label for="income" class=" form-check-label">Income</label>
+            </div>
+            
+            <input type="submit" value="ADD TRANSACTION" class="btn border rounded my-bg-lighter text-white p-1 mt-2">
+        </form>
+    </section>
+    <script src="./myScript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
