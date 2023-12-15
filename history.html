@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Lobster&family=Monoton&family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,700;1,400;1,500&family=Neonderthaw&family=Silkscreen:wght@400;700&family=Tilt+Neon&family=Urbanist:ital,wght@0,200;0,400;0,600;0,800;1,200;1,400&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <style>
+        /*
+         NEON COLORS PALETTE
+         Pink:     #FF1178
+         Red:      #FE0000
+         Yellow:   #FFF205
+         Cyian:    #01FFF4
+         Green:    #7CFF01
+         Bg-color: #181818
+         */
+        body {
+            font-family: 'Urbanist', sans-serif;
+        }
+
+        .my-bg {
+            background-color: #181818;
+        }
+
+        .my-bg-lighter {
+            background-color: #272727;
+        }
+
+        .my-bg-light {
+            background-color: #323232;
+        }
+
+        .d-center {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .w-90 {
+            width: 90%;
+        }
+    </style>
+</head>
+
+<body class="my-bg p-3 text-white text-center d-flex flex-column align-items-center gap-4" style="height: 100vh;">
+    <h3 class="h3 text-center mt-3 mb-0">Expense Tracker</h3>
+    <section id="history-section" class="d-flex flex-column p-0 m-0 w-90">
+        <div id="history-title" class="d-flex justify-content-between border-bottom mb-3">
+            <p class="m-0">History</p>
+            <a class="text-decoration-none text-white-50" href="./index.html">BACK</a>
+        </div>
+        <div id="history" class="d-center gap-2">
+            <!--Dynamic 4/5 elements to create-->
+        </div>
+    </section>
+
+
+    <script>
+        //SAME AS myScript.js HISTORY BUILDER SCRIPT BUT WITHOUT OFFSET
+        function build(obj) {
+            let transactionClasses = "my-bg-light rounded p-2 d-flex justify-content-between w-100 border-start border-5"
+            let addOn = function () {
+                if (obj.type == 'expense') {
+                    return ['border-danger', '-']
+                } else return ['border-success', '+']
+            }()
+            let transactionNode = document.createElement('div')
+            transactionNode.className = `${transactionClasses} ${addOn[0]}`
+            transactionNode.innerHTML = `<p class="m-0 text-white-50">${obj.description}</p> 
+    <div class="d-flex">
+    <p class="m-0 text-white-50">${addOn[1] + obj.amount}</p>
+    </div>`
+            const deleteBtn = document.createElement('button')
+            deleteBtn.className = "border-0 bg-transparent p-0 ps-2"
+            deleteBtn.innerHTML = `<img src="./assets/img/delete.png" alt="delete-ico" width="60%">`
+            // This should add the button after the p-tag
+            transactionNode.lastChild.appendChild(deleteBtn)
+            // Add the delete function for button
+            deleteBtn.addEventListener("click", () => {
+                fetch(`${urlServer}/${obj.id}`, {
+                    method: "DELETE",
+                })
+                    .then((response) => response.json())
+                    .then(() => {
+                        history.removeChild(transactionNode);
+                    });
+            })
+            return transactionNode
+        }
+        let urlServer = 'http://localhost:3000/transactions'
+        fetch(urlServer)
+            .then(res => res.json())
+            .then(allTransactions => {
+                for (let transaction of allTransactions.sort((a, b) => {
+                    return new Date(b.date).getTime() - new Date(a.date).getTime()
+                })) {
+                    let history = document.getElementById('history')
+                    history.appendChild(build(transaction))
+                }
+            })
+    </script>
+</body>
+
+</html>
